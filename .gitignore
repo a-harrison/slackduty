@@ -1,0 +1,10 @@
+*~
+
+# Test directory
+test
+
+# Config directory
+config/
+
+# Node packages
+node_modules
