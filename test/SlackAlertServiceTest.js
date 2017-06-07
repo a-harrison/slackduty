@@ -17,6 +17,12 @@ __(function() {
     _type: carbon.carbond.test.ServiceTest,
     name: "SlackAlertServiceTest",
     service: _o('../lib/SlackAlertService'), // path to your Service
+    suppressServiceLogging: true,
+    setup: function() {
+      carbon.carbond.test.ServiceTest.prototype.setup.call(this)
+      // this.service.db.getCollection('alerts').drop()
+      // this.service.db.getCollection('users').drop()
+    },
     tests: [
       {
         description : 'Simple schema validation',
@@ -113,28 +119,28 @@ __(function() {
         }
       },
       // ACTION
-      {
-        description: 'Schema validation - action acknowledge',
-        reqSpec: {
-          url: '/actions',
-          method: 'POST',
-          body: exampleActionAcknowledge
-        },
-        resSpec: {
-          statusCode: 200
-        }
-      },
-      {
-        description: 'Schema validation - action resolve',
-        reqSpec: {
-          url: '/actions',
-          method: 'POST',
-          body: exampleActionResolve
-        },
-        resSpec: {
-          statusCode: 200
-        }
-      },
+      // {
+      //   description: 'Schema validation - action acknowledge',
+      //   reqSpec: {
+      //     url: '/actions',
+      //     method: 'POST',
+      //     body: exampleActionAcknowledge
+      //   },
+      //   resSpec: {
+      //     statusCode: 200
+      //   }
+      // },
+      // {
+      //   description: 'Schema validation - action resolve',
+      //   reqSpec: {
+      //     url: '/actions',
+      //     method: 'POST',
+      //     body: exampleActionResolve
+      //   },
+      //   resSpec: {
+      //     statusCode: 200
+      //   }
+      // },
       {
         description: 'Failed Action schema validation - no body',
         reqSpec: {
