@@ -12,6 +12,16 @@ var exampleDelegate = require('./exampleWebhookDelegate');
 var exampleActionAcknowledge = require('./exampleActionAcknowledge.js')
 var exampleActionResolve = require('./exampleActionResolve.js')
 
+/***************************************************************************************************
+ * TEST_EMAIL
+ */
+TEST_USERNAME = "test-user",
+
+/***************************************************************************************************
+ * TEST_PASSWORD
+ */
+TEST_PASSWORD = "rainbow",
+
 __(function() {
   module.exports = o({
     _type: carbon.carbond.test.ServiceTest,
@@ -20,8 +30,9 @@ __(function() {
     suppressServiceLogging: true,
     setup: function() {
       carbon.carbond.test.ServiceTest.prototype.setup.call(this)
-      // this.service.db.getCollection('alerts').drop()
-      // this.service.db.getCollection('users').drop()
+      this.service.db.getCollection('alerts').drop()
+      this.service.db.getCollection('users').drop()
+      this.service.db.getCollection('users').insert({ "username" : TEST_USERNAME, "password" : TEST_PASSWORD, "role" : "test-role" })
     },
     tests: [
       {
@@ -29,6 +40,9 @@ __(function() {
         reqSpec: {
           url: '/alerts',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: {
             "messages" : [
               { "type" : "some string" }
@@ -44,6 +58,9 @@ __(function() {
         reqSpec: {
           url: '/alerts',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: exampleTrigger
         },
         resSpec: {
@@ -55,6 +72,9 @@ __(function() {
         reqSpec: {
           url: '/alerts',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: exampleAcknowledge
         },
         resSpec: {
@@ -66,6 +86,9 @@ __(function() {
         reqSpec: {
           url: '/alerts',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: exampleUnacknowledge
         },
         resSpec: {
@@ -77,6 +100,9 @@ __(function() {
         reqSpec: {
           url: '/alerts',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: exampleResolve
         },
         resSpec: {
@@ -88,6 +114,9 @@ __(function() {
         reqSpec: {
           url: '/alerts',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: exampleAssign
         },
         resSpec: {
@@ -99,6 +128,9 @@ __(function() {
         reqSpec: {
           url: '/alerts',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: exampleDelegate
         },
         resSpec: {
@@ -110,6 +142,9 @@ __(function() {
         reqSpec: {
           url: '/alerts',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: {
             "greeting" : "Hello, world!"
           }
@@ -146,6 +181,9 @@ __(function() {
         reqSpec: {
           url: '/actions',
           method: 'POST',
+          headers: {
+            Authorization: authorizationHeader(),
+          },
           body: {
             "greeting" : "Hello, world!"
           }
@@ -157,3 +195,18 @@ __(function() {
     ]
   })
 })
+
+/***************************************************************************************************
+ * makeBasicHeader
+ */
+function makeBasicHeader(username, password) {
+  var s = new Buffer(`${username}:${password}`).toString('base64')
+  return `Basic ${s}`
+}
+
+/***************************************************************************************************
+ * authorizationHeader()
+ */
+function authorizationHeader() {
+  return makeBasicHeader(TEST_USERNAME, TEST_PASSWORD)
+}
