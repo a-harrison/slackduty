@@ -15,12 +15,12 @@ var exampleActionResolve = require('./exampleActionResolve.js')
 /***************************************************************************************************
  * TEST_EMAIL
  */
-TEST_USERNAME = "test-user",
+var TEST_USERNAME = "test-user"
 
 /***************************************************************************************************
  * TEST_PASSWORD
  */
-TEST_PASSWORD = "rainbow",
+var TEST_PASSWORD = "rainbow"
 
 __(function() {
   module.exports = o({
@@ -30,9 +30,9 @@ __(function() {
     suppressServiceLogging: true,
     setup: function() {
       carbon.carbond.test.ServiceTest.prototype.setup.call(this)
-      this.service.db.getCollection('alerts').drop()
-      this.service.db.getCollection('users').drop()
-      this.service.db.getCollection('users').insert({ "username" : TEST_USERNAME, "password" : TEST_PASSWORD, "role" : "test-role" })
+      //this.service.db.getCollection('alerts').drop()
+      //this.service.db.getCollection('users').drop()
+      //this.service.db.getCollection('users').insert({ "username" : TEST_USERNAME, "password" : TEST_PASSWORD, "role" : "test-role" })
     },
     tests: [
       {
@@ -153,6 +153,31 @@ __(function() {
           statusCode: 400
         }
       },
+      {
+        description: 'Failed alert schema validation - no creds',
+        reqSpec: {
+          url: '/alerts',
+          method: 'POST',
+          body: exampleTrigger
+        },
+        resSpec: {
+          statusCode: 403
+        }
+      },
+      {
+        description: 'Failed alert schema validation - bad creds',
+        reqSpec: {
+          url: '/alerts',
+          method: 'POST',
+          headers: {
+            Authorization: badAuthorizationHeader(),
+          },
+          body: exampleTrigger
+        },
+        resSpec: {
+          statusCode: 401
+        }
+      },
       // ACTION
       // {
       //   description: 'Schema validation - action acknowledge',
@@ -209,4 +234,11 @@ function makeBasicHeader(username, password) {
  */
 function authorizationHeader() {
   return makeBasicHeader(TEST_USERNAME, TEST_PASSWORD)
+}
+
+/***************************************************************************************************
+ * badAuthorizationHeader()
+ */
+function badAuthorizationHeader() {
+  return makeBasicHeader('evil-user', 'i-am-a-baddie')
 }

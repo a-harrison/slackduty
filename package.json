@@ -4,12 +4,14 @@
   "description": "Slack integration for PagerDuty Webhook Events ",
   "main": "SlackAlertService.js",
   "scripts": {
-    "start": "node SlackAlertService.js",
-    "test": "node SlackAlertServiceTest.js"
+    "start": "node ./lib/SlackAlertService.js",
+    "test": "node ./test/SlackAlertServiceTest.js"
   },
+  "repository": "https://github.com/a-harrison/slackduty",
   "author": "a-harrison",
   "license": "ISC",
   "dependencies": {
+    "@carbon-io/carbon-client-node": "^0.6.7",
     "@slack/client": "^3.9.0",
     "carbon-io": "^0.4.0"
   }
