@@ -13,14 +13,9 @@ var exampleActionAcknowledge = require('./exampleActionAcknowledge.js')
 var exampleActionResolve = require('./exampleActionResolve.js')
 
 /***************************************************************************************************
- * TEST_EMAIL
+ * TEST_API_KLEY
  */
-var TEST_USERNAME = "test-user"
-
-/***************************************************************************************************
- * TEST_PASSWORD
- */
-var TEST_PASSWORD = "rainbow"
+var TEST_API_KEY = "abcdefghi1234567890"
 
 __(function() {
   module.exports = o({
@@ -38,11 +33,8 @@ __(function() {
       {
         description : 'Simple schema validation',
         reqSpec: {
-          url: '/alerts',
+          url: addAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: {
             "messages" : [
               { "type" : "some string" }
@@ -56,11 +48,8 @@ __(function() {
       {
         description: 'Schema validation using example trigger.',
         reqSpec: {
-          url: '/alerts',
+          url: addAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: exampleTrigger
         },
         resSpec: {
@@ -70,11 +59,8 @@ __(function() {
       {
         description: 'Schema validation using example acknowledge.',
         reqSpec: {
-          url: '/alerts',
+          url: addAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: exampleAcknowledge
         },
         resSpec: {
@@ -84,11 +70,8 @@ __(function() {
       {
         description: 'Schema validation using example unacknowledge.',
         reqSpec: {
-          url: '/alerts',
+          url: addAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: exampleUnacknowledge
         },
         resSpec: {
@@ -98,11 +81,8 @@ __(function() {
       {
         description: 'Schema validation using example resolve.',
         reqSpec: {
-          url: '/alerts',
+          url: addAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: exampleResolve
         },
         resSpec: {
@@ -112,11 +92,8 @@ __(function() {
       {
         description: 'Schema validation using example assign.',
         reqSpec: {
-          url: '/alerts',
+          url: addAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: exampleAssign
         },
         resSpec: {
@@ -126,11 +103,8 @@ __(function() {
       {
         description: 'Schema validation using example delegate.',
         reqSpec: {
-          url: '/alerts',
+          url: addAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: exampleDelegate
         },
         resSpec: {
@@ -140,11 +114,8 @@ __(function() {
       {
         description: 'Failed alert schema validation - no body',
         reqSpec: {
-          url: '/alerts',
+          url: addAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: {
             "greeting" : "Hello, world!"
           }
@@ -167,11 +138,8 @@ __(function() {
       {
         description: 'Failed alert schema validation - bad creds',
         reqSpec: {
-          url: '/alerts',
+          url: addBadAuthApiKey('/alerts'),
           method: 'POST',
-          headers: {
-            Authorization: badAuthorizationHeader(),
-          },
           body: exampleTrigger
         },
         resSpec: {
@@ -204,11 +172,8 @@ __(function() {
       {
         description: 'Failed Action schema validation - no body',
         reqSpec: {
-          url: '/actions',
+          url: addAuthApiKey('/actions'),
           method: 'POST',
-          headers: {
-            Authorization: authorizationHeader(),
-          },
           body: {
             "greeting" : "Hello, world!"
           }
@@ -221,24 +186,18 @@ __(function() {
   })
 })
 
+
+
 /***************************************************************************************************
- * makeBasicHeader
+ * addAuthApiKey
  */
-function makeBasicHeader(username, password) {
-  var s = new Buffer(`${username}:${password}`).toString('base64')
-  return `Basic ${s}`
+function addAuthApiKey(url) {
+  return url + '?api_key=' + TEST_API_KEY
 }
 
 /***************************************************************************************************
- * authorizationHeader()
+ * addBadAuthApiKey
  */
-function authorizationHeader() {
-  return makeBasicHeader(TEST_USERNAME, TEST_PASSWORD)
-}
-
-/***************************************************************************************************
- * badAuthorizationHeader()
- */
-function badAuthorizationHeader() {
-  return makeBasicHeader('evil-user', 'i-am-a-baddie')
+function addBadAuthApiKey(url) {
+  return url + '?api_key=thisisabadkey'
 }
