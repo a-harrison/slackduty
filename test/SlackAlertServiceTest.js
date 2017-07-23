@@ -146,29 +146,29 @@ __(function() {
           statusCode: 401
         }
       },
-      // ACTION
-      // {
-      //   description: 'Schema validation - action acknowledge',
-      //   reqSpec: {
-      //     url: '/actions',
-      //     method: 'POST',
-      //     body: exampleActionAcknowledge
-      //   },
-      //   resSpec: {
-      //     statusCode: 200
-      //   }
-      // },
-      // {
-      //   description: 'Schema validation - action resolve',
-      //   reqSpec: {
-      //     url: '/actions',
-      //     method: 'POST',
-      //     body: exampleActionResolve
-      //   },
-      //   resSpec: {
-      //     statusCode: 200
-      //   }
-      // },
+      //ACTION
+      {
+        description: 'Schema validation - action acknowledge',
+        reqSpec: {
+          url: addAuthApiKey('/actions'),
+          method: 'POST',
+          body: exampleActionAcknowledge
+        },
+        resSpec: {
+          statusCode: 200
+        }
+      },
+      {
+        description: 'Schema validation - action resolve',
+        reqSpec: {
+          url: addAuthApiKey('/actions'),
+          method: 'POST',
+          body: exampleActionResolve
+        },
+        resSpec: {
+          statusCode: 200
+        }
+      },
       {
         description: 'Failed Action schema validation - no body',
         reqSpec: {
