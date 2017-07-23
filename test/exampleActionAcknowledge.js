@@ -30,7 +30,7 @@ module.exports = {
       "bot_id":"B52HQJQEM",
       "attachments": [
         {
-          "callback_id":"test_value",
+          "callback_id":"17a02d0d370d4add8e53132199614121",
           "text":"An incident has been triggered.",
           "title":"Incident Triggered",
           "footer":"Production XDB Cluster - Laura Haley",
