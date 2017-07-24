@@ -146,7 +146,11 @@ __(function() {
           statusCode: 401
         }
       },
+<<<<<<< HEAD
       //ACTION
+=======
+      // ACTION
+>>>>>>> updateAction
       {
         description: 'Schema validation - action acknowledge',
         reqSpec: {
