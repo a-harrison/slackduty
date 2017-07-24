@@ -5,7 +5,7 @@
   "main": "SlackAlertService.js",
   "scripts": {
     "start": "node ./lib/SlackAlertService.js",
-    "test": "node ./test/SlackAlertServiceTest.js"
+    "test": "node test"
   },
   "repository": "https://github.com/a-harrison/slackduty",
   "author": "a-harrison",
