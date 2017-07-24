@@ -3,14 +3,12 @@ var o  = carbon.atom.o(module).main
 var __ = carbon.fibers.__(module).main
 var _o = carbon.bond._o(module)
 
-var exampleTrigger = require('./exampleWebhookTrigger.js');
-var exampleAcknowledge = require('./exampleWebhookAcknowledge.js');
-var exampleUnacknowledge = require('./exampleWebhookUnacknowledge.js');
-var exampleResolve = require('./exampleWebhookResolve.js');
-var exampleAssign = require('./exampleWebhookAssign.js');
-var exampleDelegate = require('./exampleWebhookDelegate');
-var exampleActionAcknowledge = require('./exampleActionAcknowledge.js')
-var exampleActionResolve = require('./exampleActionResolve.js')
+var exampleTrigger = require('./examples/WebhookTrigger.js');
+var exampleAcknowledge = require('./examples/WebhookAcknowledge.js');
+var exampleUnacknowledge = require('./examples/WebhookUnacknowledge.js');
+var exampleResolve = require('./examples/WebhookResolve.js');
+var exampleAssign = require('./examples/WebhookAssign.js');
+var exampleDelegate = require('./examples/WebhookDelegate');
 
 /***************************************************************************************************
  * BASE_URL
