@@ -61,7 +61,7 @@ If your messaging includes interactive messages, a <a href="https://support.page
 The following environment variables handle configuration for the app:
 
 Variable Name | Value | Required
---- | ---
+--- | --- | ---
 MONGODB_URI | Connection URI to MongoDB Database. | True
 SLACK_WEBHOOK_URL | The Webhook URL for the Slack app. | True
 PAGERDUTY_INTEGRATION_KEY | The integration key of the PagerDuty integration. | False
