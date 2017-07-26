@@ -20,14 +20,14 @@ Simple carbon app to listen for PagerDuty <a href="https://v2.developer.pagerdut
 
 -----
 
-##### Setup <a name="Setup"</a>
+#### Setup <a name="Setup"></a>
 
-###### 1. Install the app.<a name="Install"></a>
+##### 1. Install the app.<a name="Install"></a>
 
 * `git clone https://nasalspray@gitlab.com/nasalspray/slackduty.git`
 * `npm install`
 
-###### 2. Create app auth credentials.<a name="Slack"></a>
+##### 2. Create app auth credentials.<a name="Slack"></a>
 
 Generate an API key and store the credential in your MongoDB database. The credential will be stored in a document in the `users` collection; the API key must be stored in a field named `apiKey`. For example:
 
@@ -39,7 +39,7 @@ db.users.insert({
 
 A quick resource for getting a randomly generated key can be found at <a href="https://randomkeygen.com/">randomkeygen.com</a>.
 
-###### 3. Create a new Slack App.<a name="Slack"></a>
+##### 3. Create a new Slack App.<a name="Slack"></a>
 
 <p>Create a new app for the designated Slack account (https://api.slack.com/apps). The following features will need to be enabled:</P>
 
@@ -47,16 +47,16 @@ A quick resource for getting a randomly generated key can be found at <a href="h
 
 * Interactive Messages (Optional) - Required if using <a href="https://api.slack.com/interactive-messages">interactive Slack messages</a>. Specify the 'Request URL' to which button events (acknowledge, resolve, etc) will be sent. The path must point to the `/actions` endpoint of the app and include the API key generated earlier. For example: 'http://example.com/alerts?apiKey=abcdefgh123456'
 
-###### 4. Configure PagerDuty<a name="PagerDuty"></a>
+##### 4. Configure PagerDuty<a name="PagerDuty"></a>
 
 Enable WebHook events to be sent from the services being monitored. Each service will need to be supplied a WebHook URL pointing to the `/alerts` endpoint of the app. This URL must also include the API key.
 
-If your messaging includes interactive messages, a <a href="https://support.pagerduty.com/v1/docs/services-and-integrations">Generic Events API Integration</a> is required to allow this app to update and resolve incidents. The integration key for the integration will be used by the app in the Events API; this key will be the value of the *PAGERDUTY_INTEGRATION_KEY* environment variable. 
+If your messaging includes interactive messages, a <a href="https://support.pagerduty.com/v1/docs/services-and-integrations">Generic Events API Integration</a> is required to allow this app to update and resolve incidents. The integration key for the integration will be used by the app in the Events API; this key will be the value of the *PAGERDUTY_INTEGRATION_KEY* environment variable.
 
 *Note* - The app uses the <a href="https://v2.developer.pagerduty.com/docs/events-api">v1 version</a> of the PagerDuty Events API.
 
 
-###### 5. Config Variables<a name="Configuration"></a>
+##### 5. Config Variables<a name="Configuration"></a>
 
 The following environment variables handle configuration for the app:
 
@@ -69,7 +69,7 @@ PAGERDUTY_INTEGRATION_KEY | The integration key of the PagerDuty integration. | 
 
 ----
 
-##### Overview<a name="Overview"></a>
+#### Overview<a name="Overview"></a>
 
 The main class is `./lib/SlackAlertService.js`, which is a Carbon app that with two endpoints:
 
