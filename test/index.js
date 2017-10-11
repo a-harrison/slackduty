@@ -36,8 +36,8 @@ __(function() {
     },
     tests: [
       _o('./WebhookTests.js'),
-      _o('./ActionTests.js')
-//      _o('./PagerDutyIncidentHandlerTest.js')
+      _o('./ActionTests.js'),
+      _o('./PagerDutyIncidentHandlerTests.js')
     ]
   })
 })
