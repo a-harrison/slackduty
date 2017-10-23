@@ -5,6 +5,8 @@ var _o = carbon.bond._o(module)
 
 var exampleActionAcknowledge = require('./examples/ActionAcknowledge.js')
 var exampleActionResolve = require('./examples/ActionResolve.js')
+var exampleActionAcknowledgeBadToken = require('./examples/ActionAcknowledgeBadToken')
+var exampleActionAcknowledgeNoToken = require('./examples/ActionAcknowledgeNoToken')
 
 /***************************************************************************************************
  * BASE_URL
@@ -82,6 +84,28 @@ __(function() {
         },
         resSpec: {
           statusCode: 401
+        }
+      },
+      {
+        name: 'Failed token validation - bad token',
+        reqSpec: {
+          url: BASE_URL + addAuthApiKey('/actions'),
+          method: 'POST',
+          body: exampleActionAcknowledgeBadToken
+        },
+        resSpec: {
+          statusCode: 403
+        }
+      },
+      {
+        name: 'Failed token validation - no token',
+        reqSpec: {
+          url: BASE_URL + addAuthApiKey('/actions'),
+          method: 'POST',
+          body: exampleActionAcknowledgeNoToken
+        },
+        resSpec: {
+          statusCode: 403
         }
       }
     ]
