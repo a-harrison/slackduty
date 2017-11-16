@@ -24,7 +24,7 @@ Simple carbon app to listen for PagerDuty <a href="https://v2.developer.pagerdut
 
 ##### 1. Install the app.<a name="Install"></a>
 
-* `git clone https://nasalspray@gitlab.com/nasalspray/slackduty.git`
+* `git clone https://gitlab.com/nasalspray/slackduty.git`
 * `npm install`
 
 ##### 2. Create app auth credentials.<a name="Slack"></a>
