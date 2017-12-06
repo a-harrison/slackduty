@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "@carbon-io/carbon-client-node": "^0.6.7",
-    "@slack/client": "^3.9.0",
+    "@slack/client": "^3.14.2",
+    "bcrypt": "^1.0.3",
     "carbon-io": "^0.6.2",
     "mocha": "^3.5.3"
   }

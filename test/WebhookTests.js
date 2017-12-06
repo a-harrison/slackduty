@@ -18,7 +18,7 @@ BASE_URL = 'http://localhost:5629'
 /***************************************************************************************************
  * TEST_API_KLEY
  */
-TEST_API_KEY = "abcdefghi1234567890"
+TEST_API_KEY = "abcdefg"
 
 __(function() {
   module.exports = o({
@@ -28,7 +28,7 @@ __(function() {
     baseUrl: BASE_URL,
     tests: [
       {
-        name: 'Simple schema validation',
+        name: 'Webhook - Simple schema validation',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -43,7 +43,7 @@ __(function() {
         }
       },
       {
-        name: 'Trigger schema validation.',
+        name: 'Webhook - Trigger schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -54,7 +54,7 @@ __(function() {
         }
       },
       {
-        name: 'Acknowledge schema validation.',
+        name: 'Webhook - Acknowledge schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -65,7 +65,7 @@ __(function() {
         }
       },
       {
-        name: 'Unacknowledge schema validation.',
+        name: 'Webhook - Unacknowledge schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -76,7 +76,7 @@ __(function() {
         }
       },
       {
-        name: 'Resolve schema validation.',
+        name: 'Webhook - Resolve schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -87,7 +87,7 @@ __(function() {
         }
       },
       {
-        name: 'Assign schema validation.',
+        name: 'Webhook - Assign schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -98,7 +98,7 @@ __(function() {
         }
       },
       {
-        name: 'Delegate schema validation.',
+        name: 'Webhook - Delegate schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -109,7 +109,7 @@ __(function() {
         }
       },
       {
-        name: 'Failed schema validation - no body',
+        name: 'Webhook - Failed schema validation - no body',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -122,7 +122,7 @@ __(function() {
         }
       },
       {
-        name: 'Failed schema validation - no creds',
+        name: 'Webhook - Failed schema validation - no creds',
         reqSpec: {
           url: BASE_URL + '/alerts',
           method: 'POST',
@@ -133,14 +133,14 @@ __(function() {
         }
       },
       {
-        name: 'Failed schema validation - bad creds',
+        name: 'Webhook - Failed schema validation - bad creds',
         reqSpec: {
           url: BASE_URL + addBadAuthApiKey('/alerts'),
           method: 'POST',
           body: exampleTrigger
         },
         resSpec: {
-          statusCode: 401
+          statusCode: 403
         }
       }
     ]

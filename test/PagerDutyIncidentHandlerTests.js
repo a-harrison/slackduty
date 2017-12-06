@@ -34,7 +34,7 @@ __(function() {
 
             } catch (err) {
               e = err;
-              consoe.log(err)
+              console.log(err)
               console.log('Error during incident creation: ' + err)
 
             } finally {

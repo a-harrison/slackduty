@@ -19,19 +19,22 @@ __(function() {
     suppressServiceLogging: true,
     setup: function() {
       carbon.carbond.test.ServiceTest.prototype.setup.call(this)
-      this.service.db.getCollection("users").createIndex({apiKey: 1}, {unique: true})
 
-      // Insert test API Key
-      this.service.db.getCollection("users").findOneAndUpdate(
-        { "apiKey" : "abcdefghi1234567890" },
-        { "$set" : { "apiKey" : "abcdefghi1234567890" } },
-        { "upsert" : true }
-      )
+      // Check that all required environment variables are defined
+      if(_o('env:SLACK_VERIFICATION_TOKEN') === undefined)
+        throw Error('Required environment variable SLACK_VERIFICATION_TOKEN not defined.')
+
+      if(_o('env:SLACK_WEBHOOK_URL') === undefined)
+        throw Error('Required environment variable SLACK_WEBHOOK_URL not defined.')
+
+      if(_o('env:PAGERDUTY_INTEGRATION_KEY') === undefined)
+        throw Error('Required environment variable PAGERDUTY_INTEGRATION_KEY not defined.')
+
+      if(_o('env:API_KEY_HASH') === undefined)
+        throw Error('Required environment variable API_KEY_HASH not defined.')
+
     },
     teardown: function() {
-      // Drop collection
-      this.service.db.getCollection("users").drop()
-      this.service.db.getCollection("alerts").drop()
       carbon.carbond.test.ServiceTest.prototype.teardown.call(this)
     },
     tests: [

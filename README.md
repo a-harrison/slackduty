@@ -15,7 +15,6 @@ Simple carbon app to listen for PagerDuty <a href="https://v2.developer.pagerdut
 
 * Slack Account
 * PagerDuty Account
-* MongoDB database.
 * Ownership of a TLS-enabled HTTPS URL located on a publicly accessible server with a valid SSL certificate. This is required for interactive messages. (See 'Action URL SSL certificate requirements' requirements <a href="https://api.slack.com/interactive-messages">here</a>. )
 
 -----
@@ -29,15 +28,9 @@ Simple carbon app to listen for PagerDuty <a href="https://v2.developer.pagerdut
 
 ##### 2. Create app auth credentials.<a name="Slack"></a>
 
-Generate an API key and store the credential in your MongoDB database. The credential will be stored in a document in the `users` collection; the API key must be stored in a field named `apiKey`. For example:
+Generate an API key that will be used to authenticate requests made to the app. A quick resource for getting a randomly generated key can be found at <a href="https://randomkeygen.com/">randomkeygen.com</a>.
 
-```
-db.users.insert({
- "apiKey" : "thisismyapikey"
-})
-```
-
-A quick resource for getting a randomly generated key can be found at <a href="https://randomkeygen.com/">randomkeygen.com</a>.
+Generate a hash of this key using bcrypt. This hash will need to be set as the environment variable *API_KEY_HASH*.
 
 ##### 3. Create a new Slack App.<a name="Slack"></a>
 
@@ -62,7 +55,7 @@ The following environment variables handle configuration for the app:
 
 Variable Name | Value | Required
 --- | --- | ---
-MONGODB_URI | Connection URI to MongoDB Database. | True
+API_KEY_HASH | A hash of the API key used to authenticate requests | True
 SLACK_WEBHOOK_URL | The Webhook URL for the Slack app. | True
 PAGERDUTY_INTEGRATION_KEY | The integration key of the PagerDuty integration. | True
 SLACK_VERIFICATION_TOKEN | The verification token used to authenticate actions from Slack | True
@@ -79,20 +72,10 @@ The main class is `./lib/SlackAlertService.js`, which is a Carbon app that with 
 
 Messages sent to the `/alerts` endpoint are parsed according to the logic defined in `PagerDutyWebHookParser` and will generate custom formatted messages. Messaging formatting must be defined according to the <a href="https://api.slack.com/docs/message-attachments">Slack messaging guidelines</a>. The `MessageBuilder` class is a helper class to generate the formatted messages.
 
-Messages sent to `/actions` should correspond to one either 'Acknowledge' or 'Resolve' button press events on interactive messages sent to Slack. `SlackAlertService` uses the `PagerDutyIncidentHandler` helper class to send API requests to update tickets accordingly.
+Messages sent to `/actions` should correspond to one either 'Acknowledge' or 'Resolve' button press events on interactive messages sent to Slack. Each event must contain a `token` value in the payload that matches the *SLACK_VERIFICATION_TOKEN*. `SlackAlertService` uses the `PagerDutyIncidentHandler` helper class to send API requests to update tickets accordingly.
 
 #### Authentication
 
-Messages sent to either the `/alerts` or `/actions` endpoints are authenticated using an `api_key` parameter present in the URL (e.g. 'http://example.com/alerts?api_key=thisismyapikey'). The API key must correspond to a user in the `users` collection. For example:
-
-```
-// users collection
-{
- "_id" : .... ,
- "name": "test_user",
- "apiKey" : "thisismyapikey",
- ...
-}
-```
+Messages sent to either the `/alerts` or `/actions` endpoints are authenticated using an `api_key` parameter present in the URL (e.g. 'http://example.com/alerts?api_key=thisismyapikey'). The API is hashed on the server side and compared to the environment variable *API_KEY_HASH*. 
 
 Messages sent to the `/actions` endpoint will also be validated according to the <a href="https://api.slack.com/docs/token-types#verification">Slack Verification Token</a>. Verification is performed by comparing the token included in every message sent from Slack to the *SLACK_VERIFICATION_TOKEN* environment variable. The value being sent can be customized via the <a href="https://api.slack.com/apps">Slack App</a>.
