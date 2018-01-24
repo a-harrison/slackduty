@@ -23,7 +23,7 @@ Simple carbon app to listen for PagerDuty <a href="https://v2.developer.pagerdut
 
 ##### 1. Install the app.<a name="Install"></a>
 
-* `git clone https://gitlab.com/nasalspray/slackduty.git`
+* `git clone https://gitlab.com/a-harrison/slackduty.git`
 * `npm install`
 
 ##### 2. Create app auth credentials.<a name="Slack"></a>
@@ -76,6 +76,6 @@ Messages sent to `/actions` should correspond to one either 'Acknowledge' or 'Re
 
 #### Authentication
 
-Messages sent to either the `/alerts` or `/actions` endpoints are authenticated using an `api_key` parameter present in the URL (e.g. 'http://example.com/alerts?api_key=thisismyapikey'). The API is hashed on the server side and compared to the environment variable *API_KEY_HASH*. 
+Messages sent to either the `/alerts` or `/actions` endpoints are authenticated using an `api_key` parameter present in the URL (e.g. 'http://example.com/alerts?api_key=thisismyapikey'). The API is hashed on the server side and compared to the environment variable *API_KEY_HASH*.
 
 Messages sent to the `/actions` endpoint will also be validated according to the <a href="https://api.slack.com/docs/token-types#verification">Slack Verification Token</a>. Verification is performed by comparing the token included in every message sent from Slack to the *SLACK_VERIFICATION_TOKEN* environment variable. The value being sent can be customized via the <a href="https://api.slack.com/apps">Slack App</a>.
