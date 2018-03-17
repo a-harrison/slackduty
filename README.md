@@ -55,11 +55,13 @@ The following environment variables handle configuration for the app:
 
 Variable Name | Value | Required
 --- | --- | ---
-API_KEY_HASH | A hash of the API key used to authenticate requests | True
+SLACK_ALERT_SERVICE_API_KEY_HASH | A hash of the API key used to authenticate requests | True
+SLACK_ALERT_SERVICE_API_KEY | The API key used to authenticate requests. Used only for testing. | True 
 SLACK_WEBHOOK_URL | The Webhook URL for the Slack app. | True
 PAGERDUTY_INTEGRATION_KEY | The integration key of the PagerDuty integration. | True
 SLACK_VERIFICATION_TOKEN | The verification token used to authenticate actions from Slack | True
 SLACK_ALERT_SERVICE_PORT | The port on which the SlackAlertService will run | False
+
 
 ----
 

@@ -18,7 +18,7 @@ BASE_URL = 'http://localhost:5629'
 /***************************************************************************************************
  * TEST_API_KLEY
  */
-TEST_API_KEY = "abcdefg"
+TEST_API_KEY = _o('env:SLACK_ALERT_SERVICE_API_KEY')
 
 __(function() {
   module.exports = o({

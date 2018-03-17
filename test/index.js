@@ -28,7 +28,7 @@ __(function() {
       if(_o('env:PAGERDUTY_INTEGRATION_KEY') === undefined)
         throw Error('Required environment variable PAGERDUTY_INTEGRATION_KEY not defined.')
 
-      if(_o('env:API_KEY_HASH') === undefined)
+      if(_o('env:SLACK_ALERT_SERVICE_API_KEY_HASH') === undefined)
         throw Error('Required environment variable API_KEY_HASH not defined.')
 
     },
