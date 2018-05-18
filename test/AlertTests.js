@@ -23,12 +23,12 @@ TEST_API_KEY = _o('env:SLACK_ALERT_SERVICE_API_KEY')
 __(function() {
   module.exports = o({
     _type: carbon.testtube.HttpTest,
-    name: "Webhook Tests",
-    description: "Testing the ability of the app to accept Webhook events.",
+    name: "Alert Tests",
+    description: "Testing the ability of the app to accept Alert events via Webhook.",
     baseUrl: BASE_URL,
     tests: [
       {
-        name: 'Webhook - Simple schema validation',
+        name: 'Alert -  Simple schema validation',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -43,7 +43,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Trigger schema validation.',
+        name: 'Alert -  Trigger schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -54,7 +54,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Acknowledge schema validation.',
+        name: 'Alert -  Acknowledge schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -65,7 +65,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Unacknowledge schema validation.',
+        name: 'Alert -  Unacknowledge schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -76,7 +76,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Resolve schema validation.',
+        name: 'Alert -  Resolve schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -87,7 +87,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Assign schema validation.',
+        name: 'Alert -  Assign schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -98,7 +98,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Delegate schema validation.',
+        name: 'Alert -  Delegate schema validation.',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -109,7 +109,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Failed schema validation - no body',
+        name: 'Alert -  Failed schema validation - no body',
         reqSpec: {
           url: BASE_URL + addAuthApiKey('/alerts'),
           method: 'POST',
@@ -122,7 +122,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Failed schema validation - no creds',
+        name: 'Alert -  Failed schema validation - no creds',
         reqSpec: {
           url: BASE_URL + '/alerts',
           method: 'POST',
@@ -133,7 +133,7 @@ __(function() {
         }
       },
       {
-        name: 'Webhook - Failed schema validation - bad creds',
+        name: 'Alert -  Failed schema validation - bad creds',
         reqSpec: {
           url: BASE_URL + addBadAuthApiKey('/alerts'),
           method: 'POST',

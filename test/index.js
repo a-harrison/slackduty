@@ -36,9 +36,9 @@ __(function() {
       carbon.carbond.test.ServiceTest.prototype.teardown.call(this)
     },
     tests: [
-      _o('./WebhookTests.js'),
+      _o('./AlertTests.js'),
       _o('./ActionTests.js'),
-      _o('./PagerDutyIncidentHandlerTests.js')
+      // _o('./PagerDutyIncidentHandlerTests.js')
     ]
   })
 })
