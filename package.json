@@ -13,8 +13,8 @@
   "dependencies": {
     "@carbon-io/carbon-client-node": "^0.6.6",
     "@slack/client": "^3.14.2",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^2.0.1",
     "carbon-io": "^0.7.14",
-    "mocha": "^3.5.3"
+    "mocha": "^5.2.0"
   }
 }
