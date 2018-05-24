@@ -38,7 +38,7 @@ __(function() {
     tests: [
       _o('./AlertTests.js'),
       _o('./ActionTests.js'),
-      // _o('./PagerDutyIncidentHandlerTests.js')
+      _o('./PagerDutyIncidentHandlerTests.js')
     ]
   })
 })
